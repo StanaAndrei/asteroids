@@ -9,7 +9,7 @@ export default class Ship {
         this.heading = heading;
     }
 
-    draw(p5context) {        
+    draw(p5context) {
         const { x, y, heading } = this;
         const { HEIGHT } = Ship;
 
@@ -34,7 +34,7 @@ export default class Ship {
 
     moveForward(p5context) {
         const { VELOCITY } = Ship;
-        //onsole.log(this.heading);
+        //console.log(this.heading);
         this.x += VELOCITY * p5context.cos(this.heading);
         this.y += VELOCITY * p5context.sin(this.heading);
     }
