@@ -25,9 +25,11 @@ export default class Projectile {
         const { x, y, heading } = this;
 
         p5context.push();
-        p5context.fill('white');
+        p5context.fill('red');
         const deltaVec = p5.Vector.fromAngle(p5context.radians(heading));
-        p5context.circle(x + deltaVec.x * Ship.HEIGHT, y + deltaVec.y * Ship.HEIGHT, 10);
+        p5context.translate(x, y);
+        p5context.rotate(heading);
+        p5context.ellipse(deltaVec.x + Ship.HEIGHT, deltaVec.y, 20, 4);
         p5context.pop();
     }
 }
