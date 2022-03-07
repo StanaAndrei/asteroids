@@ -1,5 +1,5 @@
 export default class Ship {
-    static HEIGHT = 50;
+    static HEIGHT = 65;
     static DELTA_HEADING = 1.35;
     static VELOCITY = 1.75;
 
@@ -37,5 +37,11 @@ export default class Ship {
         //console.log(this.heading);
         this.x += VELOCITY * p5context.cos(this.heading);
         this.y += VELOCITY * p5context.sin(this.heading);
+        //animation
+        this.#showFlame();
+    }
+
+    #showFlame() {
+        
     }
 }

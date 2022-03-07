@@ -7,8 +7,8 @@ let projectiles = [];
 new p5(p5context => {
     p5context.setup = () => {
         p5context.angleMode(p5context.DEGREES);
-        p5context.createCanvas(800, 800);
-        ship = new Ship(p5context.width / 2, p5context.height / 2, -45);
+        p5context.createCanvas(window.innerWidth - 15, window.innerHeight - 20);
+        ship = new Ship(p5context.width / 2, p5context.height / 2, -0);
     }
 
     p5context.draw = () => {
@@ -32,4 +32,5 @@ new p5(p5context => {
     p5context.keyTyped = () => {
         inputController.handleFire(p5context, projectiles, ship);
     }
+    
 }, document.querySelector('#canvas'));
