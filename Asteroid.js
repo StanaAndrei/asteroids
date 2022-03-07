@@ -1,8 +1,10 @@
 export default class Asteroid {
-    constructor(x, y, diam) {
+    constructor(x, y, diam, heading, speed) {
         this.x = x;
         this.y = y;
         this.diam = diam;
+        this.heading = heading;
+        this.speed = speed;
     }
 
     draw(p5context) {
@@ -16,5 +18,11 @@ export default class Asteroid {
         p5context.circle(x, y, diam);
 
         p5context.pop();
+    }
+
+    update(p5context) {
+        const { speed, heading } = this;
+        this.x += speed * p5context.cos(heading);
+        this.y += speed * p5context.sin(heading);
     }
 }

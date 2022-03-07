@@ -14,7 +14,7 @@ new p5(p5context => {
         p5context.createCanvas(window.innerWidth - 15, window.innerHeight - 20);
         ship = new Ship(p5context.width / 2, p5context.height / 2, -45);
 
-        meteor = new Asteroid(100, 100, 50);
+        meteor = new Asteroid(100, 100, 50, 0, 5);
     }
 
     p5context.draw = () => {
@@ -22,6 +22,7 @@ new p5(p5context => {
 
         inputController.handleMovement(p5context, ship);
 
+        meteor.update(p5context);
         for (let it in projectiles) {
             projectiles[it].update(p5context);
             if (projectiles[it].isOffScreen(p5context)) {
