@@ -38,10 +38,21 @@ export default class Ship {
         this.x += VELOCITY * p5context.cos(this.heading);
         this.y += VELOCITY * p5context.sin(this.heading);
         //animation
-        this.#showFlame();
+        this.#showFlame(p5context);
     }
 
-    #showFlame() {
+    #showFlame(p5context) {
+        const { HEIGHT } = Ship;
+        p5context.push();
+
+        const { x, y, heading } = this;
+        p5context.translate(x, y);
+        p5context.rotate(heading);
+
+        p5context.fill('yellow');
+        p5context.stroke('orange');
+        p5context.triangle(-HEIGHT / 4, 0, 0, HEIGHT / 6, 0, -HEIGHT / 6);
         
+        p5context.pop();
     }
 }
