@@ -3,6 +3,8 @@ import Ship from "./Ship.js";
 
 export default class Projectile {
     static VELOCITY = 10;
+    static WIDTH = 4;
+    static LEN = 20;
 
     constructor(x, y, heading) {
         this.x = x;
@@ -29,7 +31,7 @@ export default class Projectile {
         const deltaVec = p5.Vector.fromAngle(p5context.radians(heading));
         p5context.translate(x, y);
         p5context.rotate(heading);
-        p5context.ellipse(deltaVec.x + Ship.HEIGHT, deltaVec.y, 20, 4);
+        p5context.ellipse(deltaVec.x + Ship.HEIGHT, deltaVec.y, Projectile.LEN, Projectile.WIDTH);
         p5context.pop();
     }
 }
