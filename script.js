@@ -9,6 +9,7 @@ let meteor;
 
 new p5(p5context => {
     p5context.setup = () => {
+        p5context.frameRate(60);
         p5context.angleMode(p5context.DEGREES);
         p5context.createCanvas(window.innerWidth - 15, window.innerHeight - 20);
         ship = new Ship(p5context.width / 2, p5context.height / 2, -45);
