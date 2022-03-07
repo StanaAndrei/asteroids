@@ -50,7 +50,7 @@ export default class Ship {
         p5context.rotate(heading);
 
         p5context.fill('yellow');
-        p5context.stroke('orange');
+        p5context.stroke('red');
         p5context.triangle(-HEIGHT / 4, 0, 0, HEIGHT / 6, 0, -HEIGHT / 6);
         
         p5context.pop();
