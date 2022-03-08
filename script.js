@@ -4,9 +4,11 @@ import inputController from "./InputController.js"
 import Asteroid from "./Asteroid.js";
 import collisionChecker from "./CollisionChecker.js";
 import waveCreator from "./WaveCreator.js";
+import writer from "./Writer.js";
 let ship;
 let projectiles = [];
 let asteroids = [];
+let score = 0;
 
 new p5(p5context => {
     p5context.setup = () => {
@@ -53,6 +55,9 @@ new p5(p5context => {
             for (let idxOfAsteroid = 0; idxOfAsteroid < asteroids.length; idxOfAsteroid++) {
                 if (collisionChecker.projectileHitAsteroid(projectiles[idxOfProjectile], asteroids[idxOfAsteroid], p5context)) {
                     const { x, y, speed, sizeLvl } = asteroids[idxOfAsteroid];
+                    
+                    score += asteroids[idxOfAsteroid].getScore();
+
                     asteroids.splice(idxOfAsteroid, 1);
                     projectiles.splice(idxOfProjectile, 1);
                     if (sizeLvl === 1) {
@@ -67,6 +72,8 @@ new p5(p5context => {
         if (!asteroids.length) {
             waveCreator.createWave(asteroids, p5context);
         }
+
+        writer.writeScore(p5context, score);
     }
 
     p5context.keyTyped = () => {

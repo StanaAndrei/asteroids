@@ -1,6 +1,6 @@
 export default class Asteroid {
     static MIN_DIAM = 100 / 3;
-
+    
     constructor(x, y, heading, speed, sizeLvl) {
         this.x = x;
         this.y = y;
@@ -38,5 +38,9 @@ export default class Asteroid {
             return 'y';
         }
         return '';
+    }
+
+    getScore() {
+        return (new Array(100, 50, 20))[this.sizeLvl - 1];
     }
 }
