@@ -3,6 +3,7 @@ import Ship from "./Ship.js"
 import inputController from "./InputController.js"
 import Asteroid from "./Asteroid.js";
 import collisionChecker from "./CollisionChecker.js";
+import waveCreator from "./WaveCreator.js";
 let ship;
 let projectiles = [];
 let asteroids = [];
@@ -14,7 +15,7 @@ new p5(p5context => {
         p5context.createCanvas(window.innerWidth - 15, window.innerHeight - 20);
         ship = new Ship(p5context.width / 2, p5context.height / 2, -45);
 
-        asteroids.push(new Asteroid(100, 100, +120, 1.5, 3));
+        waveCreator.createWave(asteroids, p5context);
     }
 
     p5context.draw = () => {
@@ -61,6 +62,10 @@ new p5(p5context => {
                     asteroids.push(new Asteroid(x, y, p5context.random(0, 360), speed * 2, sizeLvl - 1));
                 }
             }
+        }
+
+        if (!asteroids.length) {
+            waveCreator.createWave(asteroids, p5context);
         }
     }
 
