@@ -1,10 +1,13 @@
 export default class Asteroid {
-    constructor(x, y, diam, heading, speed) {
+    static MIN_DIAM = 100 / 3;
+
+    constructor(x, y, heading, speed, sizeLvl) {
         this.x = x;
         this.y = y;
-        this.diam = diam;
+        this.diam = Asteroid.MIN_DIAM * sizeLvl;
         this.heading = heading;
         this.speed = speed;
+        this.sizeLvl = sizeLvl;
     }
 
     draw(p5context) {

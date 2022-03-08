@@ -3,11 +3,14 @@ import Projectile from "./Projectile.js";
 
 class CollisionChecker {
     projectileHitAsteroid(projectile, asteroid, p5context) {
+        if (projectile == undefined) {
+            return;
+        }
         const deltaVec = p5.Vector.fromAngle(p5context.radians(projectile.heading));
         const projectileCenterX = projectile.x + Projectile.LEN * deltaVec.x;
         const projectileCenterY = projectile.y + Projectile.WIDTH * deltaVec.y;
 
-        return (Math.pow(asteroid.diam / 2 /*delta to solve collision errors*/ + (7 / 100) * asteroid.diam, 2) >= 
+        return (Math.pow(asteroid.diam / 2 /*delta to solve collision errors*/ + (0 / 100) * asteroid.diam, 2) >= 
             Math.pow(projectileCenterX - asteroid.x, 2) + Math.pow(projectileCenterY - asteroid.y, 2)
         )      
     }
