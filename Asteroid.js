@@ -28,4 +28,15 @@ export default class Asteroid {
         this.x += speed * p5context.cos(heading);
         this.y += speed * p5context.sin(heading);
     }
+
+    offScreenOnAxis(p5context) {
+        const { x, y, diam } = this;
+        if (x < -diam / 2 || p5context.width + diam / 2 < x) {
+            return 'x';
+        }
+        if (y < -diam / 2 || p5context.height + diam / 2 < y) {
+            return 'y';
+        }
+        return '';
+    }
 }

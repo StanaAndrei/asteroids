@@ -14,7 +14,7 @@ new p5(p5context => {
         p5context.createCanvas(window.innerWidth - 15, window.innerHeight - 20);
         ship = new Ship(p5context.width / 2, p5context.height / 2, -45);
 
-        asteroids.push(new Asteroid(100, 100, 0, 1.5, 3));
+        asteroids.push(new Asteroid(100, 100, +120, 1.5, 3));
     }
 
     p5context.draw = () => {
@@ -24,6 +24,14 @@ new p5(p5context => {
 
         for (let asteroid of asteroids) {
             asteroid.update(p5context);
+            const offScreenOnAxis = asteroid.offScreenOnAxis(p5context);
+            if (offScreenOnAxis === 'x') {
+                const sign = Math.sign(asteroid.x);
+                asteroid.x += -sign * (p5context.width + asteroid.diam);
+            } else if (offScreenOnAxis === 'y') {
+                const sign = Math.sign(asteroid.y);
+                asteroid.y += -sign * (p5context.height + asteroid.diam);
+            }
         }
         for (let it in projectiles) {
             projectiles[it].update(p5context);
