@@ -41,6 +41,6 @@ export default class Asteroid {
     }
 
     getScore() {
-        return (new Array(100, 50, 20))[this.sizeLvl - 1];
+        return new Array(100, 50, 20)[this.sizeLvl - 1];
     }
 }

@@ -15,7 +15,7 @@ new p5(p5context => {
         p5context.frameRate(60);
         p5context.angleMode(p5context.DEGREES);
         p5context.createCanvas(window.innerWidth - 15, window.innerHeight - 20);
-        ship = new Ship(p5context.width / 2, p5context.height / 2, -45);
+        ship = new Ship(p5context.width / 2, p5context.height / 2, 0);
 
         waveCreator.createWave(asteroids, p5context);
     }
@@ -68,12 +68,19 @@ new p5(p5context => {
                 }
             }
         }
+        for (let asteroid of asteroids) {
+            if (collisionChecker.asteroidHitShip(asteroid, ship, p5context)) {
+                console.log('die');
+            }
+        }//*/
 
         if (!asteroids.length) {
             waveCreator.createWave(asteroids, p5context);
         }
 
         writer.writeScore(p5context, score);
+        //debug
+        
     }
 
     p5context.keyTyped = () => {

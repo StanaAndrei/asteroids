@@ -1,3 +1,5 @@
+import "https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"
+
 export default class Ship {
     static HEIGHT = 65;
     static DELTA_HEADING = 1.35;
@@ -25,6 +27,16 @@ export default class Ship {
         //p5context.line(0, 0, HEIGHT, 0);
 
         p5context.pop();
+    }
+
+    getVertices(p5context) {
+        const { x, y, heading } = this;
+        const { HEIGHT } = Ship;
+        return {
+            p1: {x: x + HEIGHT * p5context.cos(heading), y: y + HEIGHT * p5context.sin(heading)},
+            p2: {x: x + (HEIGHT / 4) *  p5context.sin(heading), y: y + (HEIGHT / 4) *  p5context.sin(heading - 90)},
+            p3: {x: x + -(HEIGHT / 4) *  p5context.sin(heading), y: y + (HEIGHT / 4) *  p5context.sin(heading + 90)},
+        }
     }
 
     updateHeading(dir) {
