@@ -70,7 +70,11 @@ new p5(p5context => {
         }
         for (let asteroid of asteroids) {
             if (collisionChecker.asteroidHitShip(asteroid, ship, p5context)) {
-                console.log('die');
+                //console.log('die');
+                writer.writeScore(p5context, score);
+                writer.writeDefeat(p5context);
+                p5context.noLoop();
+                return;
             }
         }//*/
 
