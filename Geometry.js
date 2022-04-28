@@ -17,9 +17,7 @@ export default class Geometry {
     }
 
     static pointInCircle(px, py, cx, cy, r) {
-        return (Math.pow(r, 2) >=
-            Math.pow(px - cx, 2) + Math.pow(py - cy, 2)
-        )
+        return r ** 2 >= (px - cx) ** 2 + (py - cy) ** 2;
     }
 
     static segInCircle(x1, y1, x2, y2, x, y, radius) {
