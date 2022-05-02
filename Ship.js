@@ -58,7 +58,10 @@ export default class Ship {
     }
 
     #showFlame(p5context) {
-        
+        if (Math.random() <= .35) {
+            return;
+        }
+
         const { HEIGHT } = Ship;
         p5context.push();
 
