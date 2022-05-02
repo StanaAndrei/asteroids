@@ -47,13 +47,18 @@ export default class Ship {
     moveForward(p5context) {
         const { VELOCITY } = Ship;
         //console.log(this.heading);
-        this.x += VELOCITY * p5context.cos(this.heading);
-        this.y += VELOCITY * p5context.sin(this.heading);
+        this.#utilMoveForward(p5context, VELOCITY, this.heading);
         //animation
         this.#showFlame(p5context);
     }
+    
+    #utilMoveForward(p5context, velocity, heading) {
+        this.x += velocity * p5context.cos(heading);
+        this.y += velocity * p5context.sin(heading);
+    }
 
     #showFlame(p5context) {
+        
         const { HEIGHT } = Ship;
         p5context.push();
 
