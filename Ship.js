@@ -52,7 +52,7 @@ export default class Ship {
     increaseSpeed() {
         this.velocityDir = this.heading;
         this.engineOn = true;
-        this.speed = Math.min(Ship.MAX_SPEED, this.speed + .1);
+        this.speed = Math.min(Ship.MAX_SPEED, this.speed + .05);
     }
 
     decreaseSpeed() {
