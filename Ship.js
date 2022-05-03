@@ -3,12 +3,17 @@ import "https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"
 export default class Ship {
     static HEIGHT = 65;
     static DELTA_HEADING = 1.35;
-    static VELOCITY = 1.75;
+    static MAX_SPEED = 5;
+     
 
     constructor(x, y, heading) {
         this.x = x;
         this.y = y;
         this.heading = heading;
+        this.velocityDir = null;
+        this.engineOn = false;
+        this.momentumVector = {value: 0, heading: this.heading};
+        this.speed = 0;
     }
 
     draw(p5context) {
@@ -44,17 +49,28 @@ export default class Ship {
         this.heading %= 360;
     }
 
-    moveForward(p5context) {
-        const { VELOCITY } = Ship;
-        //console.log(this.heading);
-        this.#utilMoveForward(p5context, VELOCITY, this.heading);
+    increaseSpeed() {
+        this.velocityDir = this.heading;
+        this.engineOn = true;
+        this.speed = Math.min(Ship.MAX_SPEED, this.speed + .1);
+    }
+
+    decreaseSpeed() {
+        this.engineOn = false;
+        this.speed = Math.max(0, this.speed - .02);
+    }
+
+    applyVelocity(p5context) {
+        this.#utilMoveForward(p5context, this.speed, this.velocityDir);
         //animation
-        this.#showFlame(p5context);
+        if (this.engineOn) {
+            this.#showFlame(p5context);
+        }
     }
     
-    #utilMoveForward(p5context, velocity, heading) {
-        this.x += velocity * p5context.cos(heading);
-        this.y += velocity * p5context.sin(heading);
+    #utilMoveForward(p5context, MAX_SPEED, heading) {
+        this.x += MAX_SPEED * p5context.cos(heading);
+        this.y += MAX_SPEED * p5context.sin(heading);
     }
 
     #showFlame(p5context) {

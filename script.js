@@ -68,6 +68,8 @@ new p5(p5context => {
                 }
             }
         }
+
+        ship.applyVelocity(p5context);
         for (let asteroid of asteroids) {
             if (collisionChecker.asteroidHitShip(asteroid, ship, p5context)) {
                 //console.log('die');
@@ -89,6 +91,9 @@ new p5(p5context => {
 
     p5context.keyTyped = () => {
         inputController.handleFire(p5context, projectiles, ship);
+    }
+
+    p5context.keyReleased = () => {
     }
 
 }, document.querySelector('#canvas'));
