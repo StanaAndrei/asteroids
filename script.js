@@ -9,6 +9,8 @@ let ship;
 let projectiles = [];
 let asteroids = [];
 let score = 0;
+let lastOFSCheck = Number.NEGATIVE_INFINITY;
+const DELTA_FRAMES = 100;
 
 new p5(p5context => {
     p5context.setup = () => {
@@ -16,8 +18,6 @@ new p5(p5context => {
         p5context.angleMode(p5context.DEGREES);
         p5context.createCanvas(window.innerWidth - 15, window.innerHeight - 20);
         ship = new Ship(p5context.width / 2, p5context.height / 2, 0);
-
-        waveCreator.createWave(asteroids, p5context);
     }
 
     p5context.draw = () => {
@@ -40,6 +40,22 @@ new p5(p5context => {
             projectiles[it].update(p5context);
             if (projectiles[it].isOffScreen(p5context)) {
                 projectiles.splice(it, 1);
+            }
+        }
+
+        
+        if (p5context.frameCount > lastOFSCheck + DELTA_FRAMES && ship.isOffScreen(p5context)) {
+            lastOFSCheck = p5context.frameCount;
+            //div 1.5 to be faster
+            if (ship.x < 0) {
+                ship.x = p5context.width + Ship.HEIGHT / 1.5;
+            } else if (ship.x > p5context.width) {
+                ship.x = -Ship.HEIGHT / 1.5;
+            }
+            if (ship.y < 0) {
+                ship.y = p5context.height + Ship.HEIGHT / 1.5;
+            } else if (ship.y > p5context.height) {
+                ship.y = -Ship.HEIGHT / 1.5;
             }
         }
 

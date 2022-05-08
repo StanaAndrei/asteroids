@@ -4,7 +4,7 @@ export default class Ship {
     static HEIGHT = 65;
     static DELTA_HEADING = 1.35;
     static MAX_SPEED = 5;
-     
+
 
     constructor(x, y, heading) {
         this.x = x;
@@ -12,13 +12,16 @@ export default class Ship {
         this.heading = heading;
         this.velocityDir = null;
         this.engineOn = false;
-        this.momentumVector = {value: 0, heading: this.heading};
+        this.momentumVector = { value: 0, heading: this.heading };
         this.speed = 0;
     }
 
     draw(p5context) {
         const { x, y, heading } = this;
         const { HEIGHT } = Ship;
+
+        //p5context.circle(x, y, 10);//center
+
 
         p5context.push();
 
@@ -28,19 +31,30 @@ export default class Ship {
 
         p5context.noFill();
         p5context.stroke('white');
+
         p5context.triangle(HEIGHT, 0, 0, HEIGHT / 4, 0, -HEIGHT / 4);//
         //p5context.line(0, 0, HEIGHT, 0);
 
         p5context.pop();
     }
 
+    isOffScreen(p5context) {
+        const pointOut = ({ x, y }) => !(0 <= x && x <= p5context.width && 0 <= y && y <= p5context.height);
+
+        const { p1, p2, p3 } = this.getVertices(p5context);
+        if (pointOut(p1) && pointOut(p2) && pointOut(p3)) {
+            return true;
+        }
+        return false;
+    }
+
     getVertices(p5context) {
         const { x, y, heading } = this;
         const { HEIGHT } = Ship;
         return {
-            p1: {x: x + HEIGHT * p5context.cos(heading), y: y + HEIGHT * p5context.sin(heading)},
-            p2: {x: x + (HEIGHT / 4) *  p5context.sin(heading), y: y + (HEIGHT / 4) *  p5context.sin(heading - 90)},
-            p3: {x: x + -(HEIGHT / 4) *  p5context.sin(heading), y: y + (HEIGHT / 4) *  p5context.sin(heading + 90)},
+            p1: { x: x + HEIGHT * p5context.cos(heading), y: y + HEIGHT * p5context.sin(heading) },
+            p2: { x: x + (HEIGHT / 4) * p5context.sin(heading), y: y + (HEIGHT / 4) * p5context.sin(heading - 90) },
+            p3: { x: x - (HEIGHT / 4) * p5context.sin(heading), y: y + (HEIGHT / 4) * p5context.sin(heading + 90) },
         }
     }
 
@@ -67,7 +81,7 @@ export default class Ship {
             this.#showFlame(p5context);
         }
     }
-    
+
     #utilMoveForward(p5context, MAX_SPEED, heading) {
         this.x += MAX_SPEED * p5context.cos(heading);
         this.y += MAX_SPEED * p5context.sin(heading);
@@ -88,7 +102,7 @@ export default class Ship {
         p5context.fill('yellow');
         p5context.stroke('red');
         p5context.triangle(-HEIGHT / 4, 0, 0, HEIGHT / 6, 0, -HEIGHT / 6);
-        
+
         p5context.pop();
     }
 }
