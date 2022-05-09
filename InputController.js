@@ -32,10 +32,6 @@ class InputController {
 
         p5context.pop();
     }
-
-    applyMomentum(p5context, ship) {
-        
-    }
 }
 
 const inputController = new InputController();
