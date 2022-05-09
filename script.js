@@ -17,6 +17,7 @@ new p5(p5context => {
         p5context.frameRate(60);
         p5context.angleMode(p5context.DEGREES);
         p5context.createCanvas(window.innerWidth - 15, window.innerHeight - 20);
+        
         ship = new Ship(p5context.width / 2, p5context.height / 2, 0);
     }
     
@@ -26,7 +27,7 @@ new p5(p5context => {
         if (!asteroids.length) {
             waveCreator.createWave(asteroids, p5context);
         }
-        
+
         inputController.handleMovement(p5context, ship);
 
         for (let asteroid of asteroids) {
@@ -40,6 +41,7 @@ new p5(p5context => {
                 asteroid.y += -sign * (p5context.height + asteroid.diam);
             }
         }
+
         for (let it in projectiles) {
             projectiles[it].update(p5context);
             if (projectiles[it].isOffScreen(p5context)) {
@@ -90,6 +92,7 @@ new p5(p5context => {
         }
 
         ship.applyVelocity(p5context);
+
         for (let asteroid of asteroids) {
             if (collisionChecker.asteroidHitShip(asteroid, ship, p5context)) {
                 //console.log('die');
@@ -108,8 +111,4 @@ new p5(p5context => {
     p5context.keyTyped = () => {
         inputController.handleFire(p5context, projectiles, ship);
     }
-
-    p5context.keyReleased = () => {
-    }
-
 }, document.querySelector('#canvas'));
