@@ -13,7 +13,7 @@ class InputController {
             ship.updateHeading(-1);
         } else if (p5context.keyIsDown(RIGHT_ARROW)) {
             ship.updateHeading(1);
-        }
+        } 
         if (p5context.keyIsDown(UP_ARROW)) {
             ship.increaseSpeed(p5context);
         } else {

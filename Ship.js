@@ -64,6 +64,9 @@ export default class Ship {
     }
 
     increaseSpeed() {
+        if (!this.engineOn && Math.abs(this.velocityDir - this.heading) >= 90) {
+            this.speed = 0;
+        }
         this.velocityDir = this.heading;
         this.engineOn = true;
         this.speed = Math.min(Ship.MAX_SPEED, this.speed + .05);
